@@ -9,7 +9,7 @@ function Write-Utf8($rel, $content) {
   $path = Join-Path $Root $rel
   $dir = Split-Path $path -Parent
   if ($dir -and -not (Test-Path $dir)) { New-Item -ItemType Directory -Path $dir -Force | Out-Null }
-  [System.IO.File]::WriteAllText($path, $content, [System.Text.UTF8Encoding]::new($false))
+  [System.IO.File]::WriteAllText($path, $content, [System.Text.UTF8Encoding]::new($true)  # UTF-8 BOM for Windows Chinese locale)
 }
 
 Write-Utf8 'MISSION.md' @'
