@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>第 4 课：声明 vs 证据</title>
+  <link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body>
+  <h1>第 4 课：声明 vs 证据</h1>
+  <p class="subtitle">Claim-evidence gap · 约 12 分钟</p>
+
+  <h2>核心问题</h2>
+  <p>
+    很多论文 abstract 写「SOTA」，但表格只证明：<strong>平均分高了 0.2</strong>。
+    这不一定等于「大多数子任务更好」「效果量有意义」「去掉某个数据集仍领先」。
+  </p>
+  <p>
+    来源：<a href="https://arxiv.org/html/2605.17273v1" target="_blank" rel="noopener">State-of-the-Art Claims Require State-of-the-Art Evidence</a>
+  </p>
+
+  <h2>声明强度 vs 证据强度</h2>
+  <table style="width:100%;border-collapse:collapse;font-size:0.9rem">
+    <tr style="background:#f5f5f4"><th style="border:1px solid #e5e2dd;padding:0.5rem">弱证据</th><th style="border:1px solid #e5e2dd;padding:0.5rem">强证据</th></tr>
+    <tr><td style="border:1px solid #e5e2dd;padding:0.5rem">单一 aggregate 分数</td><td style="border:1px solid #e5e2dd;padding:0.5rem">多数子任务一致领先 + 效应量</td></tr>
+    <tr><td style="border:1px solid #e5e2dd;padding:0.5rem">一次 run</td><td style="border:1px solid #e5e2dd;padding:0.5rem">多次 seed + 置信区间</td></tr>
+    <tr><td style="border:1px solid #e5e2dd;padding:0.5rem">弱 baseline</td><td style="border:1px solid #e5e2dd;padding:0.5rem">同期强公开 baseline 公平对比</td></tr>
+  </table>
+
+  <h2>你可以用的三句话模板</h2>
+  <ul>
+    <li>「作者在 <em>benchmark B</em> 的 <em>metric M</em> 上报告了最高分。」（事实）</li>
+    <li>「这是否构成 broad SOTA，取决于子任务分布与效应量。」（审慎）</li>
+    <li>「我尚未验证 baseline 公平性与复现性。」（诚实边界）</li>
+  </ul>
+
+  <div class="quiz">
+    <p>平均分第一，但 60% 子任务输给榜二。最准确的表述？</p>
+    <div class="quiz-options">
+      <label><input type="radio" name="q1" value="a" /> A. 全面 SOTA，全面超越榜二</label>
+      <label><input type="radio" name="q1" value="b" /> B. aggregate metric 领先，但子任务表现不一致</label>
+      <label><input type="radio" name="q1" value="c" /> C. 不是 SOTA，声明造假</label>
+    </div>
+    <button type="button" onclick="check()">提交</button>
+    <div id="fb"></div>
+  </div>
+
+  <footer>
+    <a href="0003-leaderboard-practice.html">← 第 3 课</a> ·
+    <a href="0005-sota-vs-production.html">第 5 课 →</a>
+  </footer>
+  <script>
+    function check() {
+      const p = document.querySelector('input[name="q1"]:checked');
+      const fb = document.getElementById('fb');
+      if (!p) { fb.style.color='#b91c1c'; fb.textContent='请选择'; return; }
+      fb.style.color = p.value==='b' ? '#15803d' : '#b91c1c';
+      fb.textContent = p.value==='b' ? '正确。精确描述 aggregate vs per-task。' : p.value==='a' ? '过度解读 aggregate。' : '不一定造假，可能是 claim 过强。';
+    }
+  </script>
+</body>
+</html>

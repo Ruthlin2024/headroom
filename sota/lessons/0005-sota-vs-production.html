@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>第 5 课：SOTA ≠ 能上线</title>
+  <link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body>
+  <h1>第 5 课：SOTA ≠ 能上线 ≠ 最便宜</h1>
+  <p class="subtitle">三个维度不要混 · 约 10 分钟</p>
+
+  <h2>三个正交维度</h2>
+  <div class="card-grid">
+    <div class="card"><strong>榜单性能</strong>Benchmark 分数是否最高</div>
+    <div class="card"><strong>产品可用</strong>延迟、稳定性、安全、可维护</div>
+    <div class="card"><strong>经济可行</strong>推理成本、GPU、能耗</div>
+  </div>
+
+  <p>实验室 SOTA 可能在 8×H100 上跑；产品可能要 CPU 边缘部署——<strong>不是同一个问题</strong>。</p>
+
+  <h2>选型问句（比「是不是 SOTA」更有用）</h2>
+  <ul>
+    <li>我们的 task 和 benchmark 一致吗？</li>
+    <li>p99 延迟预算是多少？</li>
+    <li>单次推理成本上限？</li>
+    <li>失败时谁负责？（幻觉、安全）</li>
+  </ul>
+
+  <div class="callout">
+    <strong>毕业标准：</strong>你能向同事解释——为什么我们不直接上 leaderboard 第一名。
+  </div>
+
+  <h2>课程完成 ✓</h2>
+  <p>五课走完，你应能：四要素拆解 → 读表 → 查榜 → 批判声明 → 区分研究 vs 产品。</p>
+  <p>继续练习：选一篇真实论文，用 <a href="../reference/four-questions-checklist.html">检查清单</a> 写半页分析，存到 <code>learning-records/</code>。</p>
+
+  <footer>
+    <a href="0004-claim-vs-evidence.html">← 第 4 课</a> ·
+    <a href="index.html">返回目录</a>
+  </footer>
+</body>
+</html>

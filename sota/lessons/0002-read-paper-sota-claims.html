@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>第 2 课：读论文里的 SOTA 声明</title>
+  <link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body>
+  <h1>第 2 课：如何读论文里的 SOTA 声明</h1>
+  <p class="subtitle">从 abstract 到实验表格 · 约 15 分钟</p>
+
+  <h2>阅读顺序（不要从结论倒推）</h2>
+  <ol>
+    <li><strong>Abstract</strong> — 圈出所有 SOTA / outperform / state-of-the-art 字样</li>
+    <li><strong>实验设置</strong> — 用的哪个 benchmark？metric 怎么算？</li>
+    <li><strong>对比表格</strong> — baseline 是谁？是否公平（同数据、同算力、同 prompt）？</li>
+    <li><strong>提升幅度</strong> — 0.3 分在 100 分制里有意义吗？有误差条/多次 run 吗？</li>
+  </ol>
+
+  <div class="callout">
+    Abstract 里的 SOTA 是<strong>主张</strong>；Table 2 才是<strong>证据</strong>。你的工作是检查二者是否匹配。
+  </div>
+
+  <h2>表格里要看的 5 列信息</h2>
+  <ul>
+    <li>Method / Model name</li>
+    <li>Benchmark subset（如 MMLU 全量还是子集）</li>
+    <li>Metric 数值</li>
+    <li>Baseline 来源（同期公开模型还是作者复现）</li>
+    <li>是否 bold 最佳 — bold 只表示该列最高，不表示全面胜利</li>
+  </ul>
+
+  <h2>红旗信号 🚩</h2>
+  <ul>
+    <li>只比「自家上一版」或弱 baseline</li>
+    <li>测试集与训练集有泄漏嫌疑</li>
+    <li>未报告 variance / 单次 run</li>
+    <li>「SOTA on average」但多数子任务输给别人</li>
+  </ul>
+  <p>延伸阅读：<a href="https://arxiv.org/html/2605.17273v1" target="_blank" rel="noopener">SOTA Claims Require SOTA Evidence</a></p>
+
+  <h2>自测</h2>
+  <div class="quiz">
+    <p>Abstract 写「achieves new SOTA on Benchmark X」，你下一步最该做？</p>
+    <div class="quiz-options">
+      <label><input type="radio" name="q1" value="a" /> A. 转发结论，说明 X 已被解决</label>
+      <label><input type="radio" name="q1" value="b" /> B. 打开 Table，核对 metric、baseline、子任务分布</label>
+      <label><input type="radio" name="q1" value="c" /> C. 只看 citation 数判断可信度</label>
+    </div>
+    <button type="button" onclick="check()">提交</button>
+    <div id="fb"></div>
+  </div>
+
+  <footer>
+    <a href="0001-what-is-sota.html">← 第 1 课</a> ·
+    <a href="0003-leaderboard-practice.html">第 3 课 →</a>
+  </footer>
+  <script>
+    function check() {
+      const p = document.querySelector('input[name="q1"]:checked');
+      const fb = document.getElementById('fb');
+      if (!p) { fb.style.color='#b91c1c'; fb.textContent='请选择'; return; }
+      fb.style.color = p.value==='b' ? '#15803d' : '#b91c1c';
+      fb.textContent = p.value==='b' ? '正确。证据在实验段，不在 abstract 形容词里。' : p.value==='a' ? '过早下结论。' : 'Citation 与单次实验设计无关。';
+    }
+  </script>
+</body>
+</html>

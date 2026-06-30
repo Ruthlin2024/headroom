@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>第 1 课：SOTA 是什么？</title>
+  <link rel="stylesheet" href="../assets/styles.css" />
+  <style>
+    .quad { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin: 1.25rem 0; }
+    @media (max-width: 480px) { .quad { grid-template-columns: 1fr; } }
+    .quad div { border: 1px solid var(--border); border-radius: 6px; padding: 0.85rem; background: #fff; }
+    .quad strong { color: var(--accent); display: block; margin-bottom: 0.25rem; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin: 1rem 0; }
+    th, td { border: 1px solid var(--border); padding: 0.5rem 0.65rem; text-align: left; }
+    th { background: #f5f5f4; }
+  </style>
+</head>
+<body>
+  <h1>第 1 课：SOTA 是什么？</h1>
+  <p class="subtitle">State-of-the-Art · 约 12 分钟</p>
+
+  <div class="callout">
+    <strong>SOTA</strong> = <strong>State-of-the-Art</strong>，指在<strong>特定任务</strong>上、按<strong>特定指标</strong>、在<strong>特定基准</strong>上、于<strong>某一时间点</strong>报告的最佳已知结果。不是「全世界最强的 AI」。
+  </div>
+
+  <h2>一句话定义</h2>
+  <p>
+    在 AI/ML 里，SOTA 通常指：某模型在某 benchmark 上刷新了公开排行榜的最高分。
+    来源：<a href="https://howaiworks.ai/glossary/state-of-the-art-model" target="_blank" rel="noopener">HowAIWorks — SOTA Glossary</a>
+  </p>
+
+  <h2>四个必问要素</h2>
+  <p>看到「我们达到 SOTA」时，立刻拆成四问——缺任何一项，声明就不完整：</p>
+
+  <div class="quad">
+    <div><strong>1. 任务 Task</strong>图像分类？问答？代码生成？</div>
+    <div><strong>2. 指标 Metric</strong>准确率？F1？BLEU？延迟？</div>
+    <div><strong>3. 基准 Benchmark</strong>ImageNet？MMLU？自建测试集？</div>
+    <div><strong>4. 时间 Time</strong>2024 年 3 月榜一，今天可能已被超越</div>
+  </div>
+
+  <h2>例子：同一句「SOTA」可能完全不同</h2>
+  <table>
+    <thead>
+      <tr><th>说法</th><th>隐含四要素</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>「GPT-X 是 SOTA」</td><td>❌ 未说明任务/指标/基准——无法验证</td></tr>
+      <tr><td>「在 MMLU 上 SOTA」</td><td>⚠️ 有基准，仍缺指标细节与对比设置</td></tr>
+      <tr><td>「SuperGLUE 平均分 91.2，超过此前最佳 90.8」</td><td>✅ 任务+基准+数字+对比——可核查</td></tr>
+    </tbody>
+  </table>
+
+  <h2>常见误区</h2>
+  <ul>
+    <li><strong>SOTA ≠ 所有任务都最好</strong> — A 模型在 NLP 榜一，在视觉可能一般</li>
+    <li><strong>SOTA ≠ 能直接产品化</strong> — 榜一可能极慢、极贵、或只在实验室设置下成立</li>
+    <li><strong>榜一 ≠ 真正全面更好</strong> — 研究指出很多 SOTA 声明证据不足，见 <a href="https://arxiv.org/html/2605.17273v1" target="_blank" rel="noopener">SOTA Claims Require SOTA Evidence</a></li>
+  </ul>
+
+  <h2>自测</h2>
+  <div class="quiz">
+    <p><strong>新闻标题：</strong>「某公司发布 SOTA 大模型，全面超越竞品。」<br/>最合理的第一反应是？</p>
+    <div class="quiz-options">
+      <label><input type="radio" name="q1" value="a" /> A. 它一定是最强的通用 AI，可以直接替换现有产品</label>
+      <label><input type="radio" name="q1" value="b" /> B. 问：在哪个 task、metric、benchmark 上 SOTA？有无公开数字？</label>
+      <label><input type="radio" name="q1" value="c" /> C. SOTA 只是营销词，完全不可信，直接忽略</label>
+    </div>
+    <button type="button" onclick="checkQuiz()">提交</button>
+    <div id="quiz-feedback"></div>
+  </div>
+
+  <h2>下一课预告</h2>
+  <p>
+    第 2 课：如何读论文里的 SOTA 声明（abstract → 实验表格 → baseline 是否公平）。
+    速查：<a href="../reference/sota-glossary.html">SOTA 术语表</a>
+  </p>
+
+  <footer>
+    有问题？回 Cursor Agent 问，例如：「帮我把这篇论文的 SOTA 声明拆成四要素。」
+  </footer>
+
+  <script>
+    function checkQuiz() {
+      const picked = document.querySelector('input[name="q1"]:checked');
+      const fb = document.getElementById('quiz-feedback');
+      if (!picked) { fb.style.color = '#b91c1c'; fb.textContent = '请先选择。'; return; }
+      if (picked.value === 'b') {
+        fb.style.color = '#15803d';
+        fb.textContent = '正确。SOTA 是 contextual 的——先追问四要素，再判断证据。';
+      } else if (picked.value === 'a') {
+        fb.style.color = '#b91c1c';
+        fb.textContent = '过度推断。SOTA 几乎从不当「全面最强」的同义词。';
+      } else {
+        fb.style.color = '#b91c1c';
+        fb.textContent = '太绝对。很多 SOTA 可核查，关键是看证据是否匹配声明。';
+      }
+    }
+  </script>
+</body>
+</html>

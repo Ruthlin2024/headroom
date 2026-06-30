@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SOTA 术语速查</title>
+  <link rel="stylesheet" href="../assets/styles.css" />
+  <style>
+    dl { margin: 1rem 0; }
+    dt { font-weight: 600; color: var(--accent); margin-top: 1rem; }
+    dd { margin: 0.25rem 0 0 0; }
+    .avoid { font-size: 0.85rem; color: var(--muted); }
+  </style>
+</head>
+<body>
+  <h1>SOTA 术语速查</h1>
+  <p class="subtitle">State-of-the-Art · 本工作区 canonical 用语</p>
+
+  <dl>
+    <dt>SOTA / State-of-the-Art</dt>
+    <dd>在特定任务+指标+基准上，某时间点报告的最佳已知结果。</dd>
+    <dd class="avoid">避免：最强 AI、全面超越、永远最好。</dd>
+
+    <dt>Benchmark（基准）</dt>
+    <dd>标准化测试集 + 评测协议，使不同方法可公平对比。</dd>
+
+    <dt>Leaderboard（排行榜）</dt>
+    <dd>按 benchmark 汇总模型排名；如 Papers with Code。</dd>
+
+    <dt>Metric（指标）</dt>
+    <dd>衡量好坏的数字：accuracy、F1、BLEU、latency 等；不同指标榜一可能不同。</dd>
+
+    <dt>Baseline（基线）</dt>
+    <dd>对比用的参照模型；不公平 baseline 会夸大 SOTA 幅度。</dd>
+
+    <dt>Claim-evidence gap</dt>
+    <dd>SOTA 声明强度超过 benchmark 表格实际能支撑的程度。</dd>
+  </dl>
+
+  <h2>与易混词区分</h2>
+  <dl>
+    <dt>SOAR</dt>
+    <dd>学习方法（Select/Organize/Associate/Regulate）—— 无关。</dd>
+    <dt>医学 SOAT</dt>
+    <dd>Standardized Orthopedic Assessment Tool，骨科查体评分 —— 无关。</dd>
+  </dl>
+
+  <footer><a href="../lessons/0001-what-is-sota.html">← 第 1 课</a></footer>
+</body>
+</html>
